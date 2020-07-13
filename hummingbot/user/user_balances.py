@@ -26,7 +26,12 @@ class UserBalances:
         if exchange == "binance":
             market = BinanceMarket(api_details[0], api_details[1])
         elif exchange == "openware":
-            market = OpenwareMarket(api_details[0], api_details[1])
+            market = OpenwareMarket(
+                api_details[0],
+                api_details[1],
+                global_config_map.get("openware_api_url").value,
+                global_config_map.get("openware_ranger_url").value
+            )
         elif exchange == "bittrex":
             market = BittrexMarket(api_details[0], api_details[1])
         elif exchange == "coinbase_pro":

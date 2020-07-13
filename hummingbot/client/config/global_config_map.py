@@ -134,8 +134,8 @@ global_config_map = {
                   required_if=using_exchange("openware"),
                   is_secure=True,
                   is_connect_key=True),
-    "openware_peatio_url":
-        ConfigVar(key="openware_peatio_url",
+    "openware_api_url":
+        ConfigVar(key="openware_api_url",
                   prompt="Enter your Openware API peatio url >>> ",
                   required_if=using_exchange("openware"),
                   is_secure=False,
@@ -150,7 +150,8 @@ global_config_map = {
         ConfigVar(key="openware_currencies",
                   prompt="Enter your Openware currencies ex: 'USD|ETH|BTC >>> ",
                   required_if=using_exchange("openware"),
-                  is_secure=False),
+                  is_secure=False,
+                  is_connect_key=True),
     "coinbase_pro_api_key":
         ConfigVar(key="coinbase_pro_api_key",
                   prompt="Enter your Coinbase API key >>> ",

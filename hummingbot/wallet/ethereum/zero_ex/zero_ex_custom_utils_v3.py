@@ -18,8 +18,7 @@ from zero_ex.dev_utils.type_assertions import (
     assert_is_hex_string,
     assert_is_provider,
 )
-import zero_ex
-#from zero_ex.contract_addresses import chain_to_addresses, ChainId
+from zero_ex.contract_addresses import chain_to_addresses, ChainId
 from zero_ex.contract_wrappers.exchange import Exchange
 from web3.providers.base import BaseProvider
 
@@ -200,8 +199,8 @@ def is_valid_signature(
 
     return Exchange(
         provider,
-        zero_ex.contract_addresses.chain_to_addresses(
-            zero_ex.contract_addresses.ChainId(
+        chain_to_addresses(
+            ChainId(
                 chain_id  # defaults to always be mainnet
             )
         ).exchange,

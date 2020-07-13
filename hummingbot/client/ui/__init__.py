@@ -7,12 +7,12 @@ with open(realpath(join(dirname(__file__), '../../VERSION'))) as version_file:
     version = version_file.read().strip()
 
 dialog_style = Style.from_dict({
-    'dialog': 'bg:#171E2B',
-    'dialog frame.label': 'bg:#ffffff #000000',
-    'dialog.body': 'bg:#000000 #1CD085',
+    'dialog': 'bg:#002F41',
+    'dialog frame.label': 'bg:#ffffff #002F41',
+    'dialog.body': 'bg:#003A4C #ffffff',
     'dialog shadow': 'bg:#171E2B',
-    'button': 'bg:#000000',
-    'text-area': 'bg:#000000 #ffffff',
+    'button': 'bg:#12A8A7',
+    'text-area': 'bg:#002F41 #ffffff',
 })
 
 
@@ -32,10 +32,10 @@ def show_welcome():
 
     Version: {version}
     Codebase: https://github.com/coinalpha/hummingbot
-
+    With TunexLLC upgrading
 
         """.format(version=version),
-        style=dialog_style).run()
+        style=dialog_style)
     message_dialog(
         title='Important Warning',
         text="""
@@ -58,7 +58,7 @@ def show_welcome():
     store this password safely, since only you have access to it and we cannot reset it.
 
         """,
-        style=dialog_style).run()
+        style=dialog_style)
     message_dialog(
         title='Important Warning',
         text="""
@@ -74,7 +74,7 @@ def show_welcome():
     data. Please store this password safely since there is no way to reset it.
 
         """,
-        style=dialog_style).run()
+        style=dialog_style)
 
 
 def login_prompt():

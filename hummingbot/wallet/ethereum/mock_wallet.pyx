@@ -8,8 +8,7 @@ from typing import (
 )
 from web3 import Web3
 from web3.datastructures import AttributeDict
-# from web3.exceptions import BlockNotFound
-from web3 import exceptions
+from web3.exceptions import BlockNotFound
 
 from hummingbot.wallet.ethereum.erc20_token import ERC20Token
 from hummingbot.wallet.wallet_base cimport WalletBase
@@ -89,7 +88,7 @@ cdef class MockWallet(WalletBase):
         try:
             remote_nonce = self._w3.eth.getTransactionCount(self.address, block_identifier="pending")
             return remote_nonce
-        except exceptions.BlockNotFound:
+        except BlockNotFound:
             return None
 
     cdef object c_get_balance(self, str asset_name):

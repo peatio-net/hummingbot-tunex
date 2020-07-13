@@ -97,7 +97,7 @@ pure_market_making_config_map = {
     "market":
         ConfigVar(key="market",
                   prompt=maker_trading_pair_prompt,
-                  validator=validate_exchange_trading_pair,
+                  # validator=validate_exchange_trading_pair,
                   prompt_on_new=True),
     "bid_spread":
         ConfigVar(key="bid_spread",

@@ -14,7 +14,7 @@ binance_api_secret: null
 
 openware_api_key: null
 openware_api_secret: null
-openware_peatio_url: null
+openware_api_url: null
 openware_ranger_url: null
 openware_currencies: null
 

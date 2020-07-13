@@ -24,8 +24,7 @@ from decimal import (
 from eth_utils import remove_0x_prefix
 from libc.stdint cimport int64_t
 from web3 import Web3
-from web3 import exceptions
-# import TransactionNotFound
+from web3.exceptions import TransactionNotFound
 
 from hummingbot.core.data_type.cancellation_result import CancellationResult
 from hummingbot.core.data_type.limit_order import LimitOrder
@@ -928,7 +927,7 @@ cdef class BambooRelayMarket(MarketBase):
                         try:
                             receipt = self._w3.eth.getTransactionReceipt(tx_hash)
                             self._pending_approval_tx_hashes.remove(tx_hash)
-                        except exceptions.TransactionNotFound:
+                        except TransactionNotFound:
                             pass
             except Exception:
                 self.logger().network(
@@ -1626,7 +1625,7 @@ cdef class BambooRelayMarket(MarketBase):
         try:
             tx_hash_receipt = self._w3.eth.getTransactionReceipt(tx_hash)
             return tx_hash_receipt
-        except exceptions.TransactionNotFound:
+        except TransactionNotFound:
             return None
 
     async def list_account_orders(self) -> List[Dict[str, Any]]:
