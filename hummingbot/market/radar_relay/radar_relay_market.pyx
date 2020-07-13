@@ -16,7 +16,7 @@ from typing import (
 from decimal import Decimal
 from libc.stdint cimport int64_t
 from web3 import Web3
-from web3.exceptions import TransactionNotFound
+from web3 import exceptions
 from zero_ex.order_utils import (
     generate_order_hash_hex,
     Order as ZeroExOrder
@@ -578,7 +578,7 @@ cdef class RadarRelayMarket(MarketBase):
                         try:
                             receipt = self._w3.eth.getTransactionReceipt(tx_hash)
                             self._pending_approval_tx_hashes.remove(tx_hash)
-                        except TransactionNotFound:
+                        except exceptions.TransactionNotFound:
                             pass
             except Exception:
                 self.logger().network(
@@ -903,7 +903,7 @@ cdef class RadarRelayMarket(MarketBase):
         try:
             tx_hash_receipt = self._w3.eth.getTransactionReceipt(tx_hash)
             return tx_hash_receipt
-        except TransactionNotFound:
+        except exceptions.TransactionNotFound:
             return None
 
     async def list_account_orders(self) -> List[Dict[str, Any]]:

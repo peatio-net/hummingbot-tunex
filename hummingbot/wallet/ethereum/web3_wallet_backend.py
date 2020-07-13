@@ -22,10 +22,11 @@ from web3.contract import (
     ContractFunction
 )
 from web3.datastructures import AttributeDict
-from web3.exceptions import (
-    BlockNotFound,
-    TransactionNotFound
-)
+# from web3.exceptions import (
+#     BlockNotFound,
+#     TransactionNotFound
+# )
+from web3 import exceptions
 
 from hummingbot.core.utils.async_call_scheduler import AsyncCallScheduler
 from hummingbot.wallet.ethereum.ethereum_chain import EthereumChain
@@ -388,7 +389,7 @@ class Web3WalletBackend(PubSub):
         async_scheduler: AsyncCallScheduler = AsyncCallScheduler.shared_instance()
         try:
             return await async_scheduler.call_async(self._w3.eth.getTransactionReceipt, tx_hash)
-        except TransactionNotFound as e:
+        except exceptions.TransactionNotFound as e:
             now: float = time.time()
             if now - timestamp > 120:
                 stop_tx_hash = e.args[0].split(" ")[3]
@@ -683,5 +684,5 @@ class Web3WalletBackend(PubSub):
         try:
             remote_nonce = self._w3.eth.getTransactionCount(self.address, block_identifier="pending")
             return remote_nonce
-        except BlockNotFound:
+        except exceptions.BlockNotFound:
             return None

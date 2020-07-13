@@ -14,7 +14,8 @@ from typing import (
 )
 from web3 import Web3
 from web3.datastructures import AttributeDict
-from web3.exceptions import BlockNotFound
+# from web3.exceptions import BlockNotFound
+from web3 import exceptions
 
 from hummingbot.logger import HummingbotLogger
 from hummingbot.core.event.events import NewBlocksWatcherEvent
@@ -94,7 +95,7 @@ class NewBlocksWatcher(BaseWatcher):
                     self.logger().network(f"Timed out fetching new block - '{block_hash}'.", exc_info=True,
                                           app_warning_msg=f"Timed out fetching new block - '{block_hash}'. "
                                                           f"Check wallet network connection")
-                except BlockNotFound:
+                except exceptions.BlockNotFound:
                     pass
                 finally:
                     await asyncio.sleep(0.5)
@@ -142,7 +143,7 @@ class NewBlocksWatcher(BaseWatcher):
                     self.logger().network(f"Timed out fetching new block.", exc_info=True,
                                           app_warning_msg=f"Timed out fetching new block. "
                                                           f"Check wallet network connection")
-                except BlockNotFound:
+                except exceptions.BlockNotFound:
                     pass
                 except Exception:
                     self.logger().network(f"Error fetching new block.", exc_info=True,
@@ -177,7 +178,7 @@ class NewBlocksWatcher(BaseWatcher):
                                 full_transactions=True)
                         )
                         replacement_block = block
-                    except BlockNotFound:
+                    except exceptions.BlockNotFound:
                         pass
                     if replacement_block is None:
                         await asyncio.sleep(0.5)

@@ -3,9 +3,10 @@
 import asyncio
 from hexbytes import HexBytes
 from decimal import Decimal
-from eth_abi.codec import (
-    ABICodec,
-)
+#from eth_abi.codec import (
+#    ABICodec,
+#)
+import eth_abi
 from eth_abi.registry import registry
 from eth_bloom import BloomFilter
 from eth_utils import remove_0x_prefix
@@ -21,8 +22,9 @@ from typing import (
 from os.path import join, realpath
 import ujson
 from web3 import Web3
+import web3 as w3
 from web3.datastructures import AttributeDict
-from web3._utils.events import get_event_data
+
 
 from hummingbot.logger import HummingbotLogger
 from hummingbot.core.event.events import (
@@ -122,7 +124,7 @@ class ZeroExFillWatcher(BaseWatcher):
                             })
 
                             for fill_entry in fill_entries:
-                                event_data: AttributeDict = get_event_data(ABICodec(registry), self._event_abi, fill_entry)
+                                event_data: AttributeDict = w3.events.get_event_data(eth_abi.codec.ABICodec(registry), self._event_abi, fill_entry)
                                 event_data_tx_hash: HexBytes = event_data["transactionHash"]
                                 # Skip any duplicates
                                 if event_data_tx_hash not in self._event_cache:
